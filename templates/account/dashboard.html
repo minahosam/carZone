@@ -1,0 +1,147 @@
+{% extends 'base/base.html'%}
+{% load static %}
+{% block content %}
+
+<!-- Sub banner start -->
+<div class="sub-banner overview-bgi">
+    <div class="container breadcrumb-area">
+        <div class="breadcrumb-areas">
+            <h1>Dashboard</h1>
+            <ul class="breadcrumbs">
+                <li><a href="index.html">Home</a></li>
+                <li class="active">{{user.username}}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Sub Banner end -->
+
+<!--   Dashboard Start   -->
+
+<div class="container mt-50 mb-50">
+	<div class="main-title" style="text-align:left !important;">
+        {% include 'base/message.html' %}
+            <h1>Welcome <span>{{user.username}}</span></h1>
+            <p>Here are the cars that you have inquired about</p>
+        </div>
+	<table class="table table-hover">
+	  <thead>
+		<tr>
+		  <th scope="col">#</th>
+		  <th scope="col">Car Name</th>
+		  <th scope="col">Location</th>
+		  <th scope="col">Price</th>
+		  <th scope="col">Action</th>
+		</tr>
+	  </thead>
+	  <tbody>
+        {% for inquire in inquire_message %}
+		<tr>
+		  <th scope="row">{{inquire.id}}</th>
+		  <td>{% if inquire.car_title %}{{inquire.car_title}}{% endif %}</td>
+		  <td>{% if inquire.city %}{{inquire.city}}{% endif %}</td>
+		  <td>{% if inquire.car_title %}${{inquire.car_title.price}}{% endif %}</td>
+		  <td><a href="{% if inquire.car_title %}{% url 'cars:carDetails' inquire.car_title.slug %}{% endif %}" class="btn btn-outline-dark">View Car</a></td>
+		</tr>
+        {% endfor %}
+	  </tbody>
+	</table>
+</div>
+
+<!--   Dashboard End   -->
+
+
+<!-- Footer start -->
+{% include 'base/footer.html' %}
+<!-- Footer end -->
+
+<!-- Full Page Search -->
+<div id="full-page-search">
+    <button type="button" class="close">×</button>
+    <form action="https://storage.googleapis.com/theme-vessel/carhouse/index.html#" class="search-header">
+        <input type="search" value="" placeholder="type keyword(s) here" />
+        <button type="submit" class="btn btn-sm button-theme">Search</button>
+    </form>
+</div>
+
+<!-- Car Overview Modal -->
+<div class="car-model-2">
+    <div class="modal fade" id="carOverviewModal" tabindex="-1" role="dialog" aria-labelledby="carOverviewModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-title" id="carOverviewModalLabel">
+                        <h4>Explore Your Dream Car</h4>
+                        <h5><i class="flaticon-pin"></i> 123 Kathal St. Tampa City,</h5>
+                    </div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row modal-raw">
+                        <div class="col-lg-6 modal-left">
+                            <div class="item active">
+                                <img src="img/car-13.jpg" alt="best-car" class="img-fluid modalLabel-1">
+                                <img src="img/car-14.jpg" alt="best-car" class="img-fluid modalLabel-2">
+                                <div class="sobuz">
+                                    <div class="price-box">
+                                        <span class="del-2">$1050.00</span>
+                                    </div>
+                                    <div class="ratings-2">
+                                        <span class="ratings-box">4.5/5</span>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        ( 7 Reviews )
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 modal-right">
+                            <div class="modal-right-content">
+                                <section>
+                                    <h3>Features</h3>
+                                    <div class="features">
+                                        <ul class="bullets">
+                                            <li>Cruise Control</li>
+                                            <li>Airbags</li>
+                                            <li>Air Conditioning</li>
+                                            <li>Alarm System</li>
+                                            <li>Audio Interface</li>
+                                            <li>CDR Audio</li>
+                                            <li>Seat Heating</li>
+                                            <li>ParkAssist</li>
+                                        </ul>
+                                    </div>
+                                </section>
+                                <section>
+                                    <h3>Overview</h3>
+                                    <ul class="bullets">
+                                        <li>Model</li>
+                                        <li>Year</li>
+                                        <li>Condition</li>
+                                        <li>Price</li>
+                                        <li>Audi</li>
+                                        <li>2020</li>
+                                        <li>Brand New</li>
+                                        <li>$178,000</li>
+                                    </ul>
+                                </section>
+                                <div class="description">
+                                    <h3>Description</h3>
+                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard.</p>
+                                    <a href="car-details.html" class="btn btn-md btn-round btn-theme">Show Detail</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
